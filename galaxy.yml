@@ -1,0 +1,38 @@
+---
+
+- hosts: galaxyservers
+  vars_files:
+    - vault_vars2.yml
+  become: true
+  become_user: amn5829
+  become_method: sudo
+  gather_facts: true
+
+  pre_tasks: 
+    - name: Install Dependencies
+      become: true
+      become_user: root
+      vars:
+        ansible_become_pass: "{{ root_pass_Ali }}"
+      package:
+        name: [ 'python-psycopg2', 'git', 'python-virtualenv', 'make' ]
+
+  handlers:
+    - name: Restart Galaxy
+      become: true
+      become_user: root
+      vars: 
+        ansible_become_pass: "{{ root_pass_Ali }}"
+      supervisorctl: 
+        name: galaxy
+        state: restarted
+  roles:
+    - { role: galaxyproject.postgresql,   become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }
+    - { role: natefoo.postgresql_objects, become: yes, become_user: postgres,  ansible_become_pass: "{{ root_pass_Ali }}" } 
+    - { role: galaxyproject.galaxy,       become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }
+    - { role: uchida.miniconda,           become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }
+    - { role: geerlingguy.pip,            become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }   
+    - { role: usegalaxy-eu.supervisor,    become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }   
+    - { role: galaxyproject.nginx,        become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }   
+      
+    
