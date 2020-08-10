@@ -1,7 +1,3 @@
 [galaxyservers]
-hermes.vmhost.psu.edu:1855
+127.0.0.1  ansible_connection=local
 
-[galaxyservers:vars]
-ansible_ssh_user=amn5829
-ansible_ssh_pass= "{{ root_pass_Ali }}"
-ansible_become=true

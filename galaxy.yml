@@ -1,38 +1,31 @@
 ---
-
 - hosts: galaxyservers
   vars_files:
-    - vault_vars2.yml
+    - vars.yml
   become: true
-  become_user: amn5829
+  become_user: root
   become_method: sudo
-  gather_facts: true
-
-  pre_tasks: 
+  vars:
+   ansible_become_pass: "{{ your_password }}"
+  pre_tasks:
     - name: Install Dependencies
       become: true
       become_user: root
       vars:
-        ansible_become_pass: "{{ root_pass_Ali }}"
+        ansible_become_pass: "{{ your_password }}"
       package:
-        name: [ 'python-psycopg2', 'git', 'python-virtualenv', 'make' ]
+        name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv', 'tar', 'bzip2', 'python3-venv']
 
   handlers:
     - name: Restart Galaxy
-      become: true
-      become_user: root
-      vars: 
-        ansible_become_pass: "{{ root_pass_Ali }}"
-      supervisorctl: 
+      systemd:
         name: galaxy
         state: restarted
   roles:
-    - { role: galaxyproject.postgresql,   become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }
-    - { role: natefoo.postgresql_objects, become: yes, become_user: postgres,  ansible_become_pass: "{{ root_pass_Ali }}" } 
-    - { role: galaxyproject.galaxy,       become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }
-    - { role: uchida.miniconda,           become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }
-    - { role: geerlingguy.pip,            become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }   
-    - { role: usegalaxy-eu.supervisor,    become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }   
-    - { role: galaxyproject.nginx,        become: yes, become_user: root,      ansible_become_pass: "{{ root_pass_Ali }}" }   
-      
-    
+    - { role: galaxyproject.postgresql, become: yes, become_user: root,        ansible_become_pass: "{{ your_password }}" }
+    - { role: natefoo.postgresql_objects, become: true, become_user: postgres, ansible_become_pass: "{{ your_password }}"  }
+    - { role: geerlingguy.pip,            become: yes, become_user: root,      ansible_become_pass: "{{ your_password }}" }
+    - { role: galaxyproject.galaxy,       become: yes, become_user: root,     ansible_become_pass: "{{ your_password }}" }
+    - { role: uchida.miniconda,           become: yes, become_user: galaxy,      ansible_become_pass: "{{ your_password }}" }
+    - { role: usegalaxy_eu.galaxy_systemd,    become: yes, become_user: root,      ansible_become_pass: "{{ your_password }}" } 
+
