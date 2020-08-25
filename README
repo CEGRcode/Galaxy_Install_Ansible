@@ -1,0 +1,15 @@
+I did the following two modifications to make Ansible playbook I got from galaxy admin training respository, work on my end. In the original versions parameters are defined based on the parameters defined in just the previous line. 
+
+1-In the file roles/galaxyproject.galaxy/vars/layout-root-dir.yml:
+__galaxy_mutable_config_dir: "{{ galaxy_root }}/var/config"
+__galaxy_shed_tools_dir: "{{ galaxy_root }}/var/shed_tools"
+__galaxy_tool_dependency_dir: "{{ galaxy_root }}/var/dependencies"
+
+In the original versions parameters are defined based on the parameters defined in just the previous line. My Ansible could not intrepret that.
+
+2-In the file roles/galaxyproject.galaxy/tasks/virtualenv.yml
+virtualenv_command: pyvenv
+comment out "virtualenv_python:" variable
+
+without those two changes the virtualenv was built based on python2 and some new python script which was read based on pythonn3 was not readable. This change also suggested in 
+roles/galaxyproject.galaxy/READEME.md
