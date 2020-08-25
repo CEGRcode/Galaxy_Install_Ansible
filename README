@@ -11,5 +11,5 @@ In the original versions parameters are defined based on the parameters defined 
 virtualenv_command: pyvenv
 comment out "virtualenv_python:" variable
 
-without those two changes the virtualenv was built based on python2 and some new python script which was read based on pythonn3 was not readable. This change also suggested in 
-roles/galaxyproject.galaxy/READEME.md
+without those two changes the virtualenv was built based on python2 and some new python script which was written based on python3 was not readable. This change also suggested in 
+suggested in roles/galaxyproject.galaxy/READEME.md for Galaxy >=20.01
