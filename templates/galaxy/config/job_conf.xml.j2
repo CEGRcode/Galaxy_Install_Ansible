@@ -1,0 +1,20 @@
+<job_conf>
+    <plugins workers="4">
+        <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+        <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarRESTJobRunner" />
+    </plugins>
+
+    <destinations default="local">
+        <destination id="local" runner="local"/>
+    </destinations>
+    <destination id="pulsar" runner="pulsar_runner" >
+        <param id="url">http://128.84.9.172:80/</param>
+        <param id="private_token">{{ private_token }}</param>
+    </destination>
+
+    <tools>
+        <tool id="bwa" destination="pulsar"/>
+        <tool id="bwa_mem" destination="pulsar"/>
+    </tools>
+</job_conf>
+

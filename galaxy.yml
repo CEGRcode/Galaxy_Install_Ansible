@@ -27,5 +27,6 @@
     - { role: geerlingguy.pip,            become: yes, become_user: root,      ansible_become_pass: "{{ your_password }}" }
     - { role: galaxyproject.galaxy,       become: yes, become_user: root,     ansible_become_pass: "{{ your_password }}" }
     - { role: uchida.miniconda,           become: yes, become_user: galaxy,      ansible_become_pass: "{{ your_password }}" }
-    - { role: usegalaxy_eu.galaxy_systemd,    become: yes, become_user: root,      ansible_become_pass: "{{ your_password }}" } 
+    - { role: usegalaxy_eu.galaxy_systemd,    become: yes, become_user: root,      ansible_become_pass: "{{ your_password }}" }
+    - { role: galaxyproject.cvmfs, become: yes } 
 

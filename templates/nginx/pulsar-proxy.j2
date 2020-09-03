@@ -1,0 +1,13 @@
+server {
+    # Listen on 80, you should secure your server better :)
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    location / {
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_pass http://localhost:8913;
+    }
+}
+

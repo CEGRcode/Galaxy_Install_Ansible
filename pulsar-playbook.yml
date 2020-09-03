@@ -1,0 +1,43 @@
+- hosts: pulsarservers
+  vars_files:
+    - vars.yml
+  become: true
+  become_user: an653
+  become_method: sudo
+  vars:
+   ansible_become_pass: "{{ cornell_password }}"
+ 
+  pre_tasks:
+    - name: Install some packages
+      become: true
+      become_user: root
+      vars:
+        ansible_become_pass: "{{ cornell_password }}"
+      package:
+        name:
+          - build-essential
+          - git
+          - python3-dev
+          - libcurl4-openssl-dev
+          - libssl-dev
+          - virtualenv
+        state: present
+        update_cache: yes
+      become: yes
+    - name: chown the /mnt dir to ubuntu
+      become: true
+      become_user: root
+      vars:
+        ansible_become_pass: "{{ cornell_password }}"
+      file:
+        path: /mnt
+        owner: ubuntu
+        group: ubuntu
+        mode: 0755
+      become: yes
+  roles:
+    - { role: galaxyproject.cvmfs, become: yes, become_user: root, ansible_become_pass: "{{ cornell_password }}" }
+    - {role: galaxyproject.nginx,  become: yes, become_user: root, ansible_become_pass: "{{ cornell_password }}" }
+ 
+    - galaxyproject.pulsar
+

@@ -232,7 +232,9 @@ galaxy_errordocs_prefix: /error
 # These are lists of hashes in the same format as galaxy_mutable_configs that can be used to cause extra files and
 # templates to be installed on the managed host.
 galaxy_config_files: []
-galaxy_config_templates: []
+galaxy_config_templates: 
+  - src: templates/galaxy/config/job_conf.xml.j2
+    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 
 # Default uWSGI configuration
 galaxy_uwsgi_yaml_parser: internal

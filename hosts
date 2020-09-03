@@ -1,3 +1,8 @@
-[galaxyservers]
-127.0.0.1  ansible_connection=local
+#[galaxyservers]
+#127.0.0.1  ansible_connection=local
+
+[pulsarservers]
+#server1 ansible_host=juno.vmhost.psu.edu ansible_port=1855 ansible_user=**** ansible_ssh_pass=*****
+server2 ansible_host=128.84.9.172 ansible_port=22 ansible_user=**** ansible_ssh_pass=*****
+
 
