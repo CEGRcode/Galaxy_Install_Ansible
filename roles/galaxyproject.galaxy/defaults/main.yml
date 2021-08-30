@@ -11,6 +11,7 @@ galaxy_create_user: no
 galaxy_manage_paths: no
 galaxy_manage_clone: yes
 galaxy_manage_download: no
+galaxy_manage_existing: no
 galaxy_manage_static_setup: yes
 galaxy_manage_mutable_setup: yes
 galaxy_manage_database: yes
@@ -157,7 +158,7 @@ galaxy_requirements_file: "{{ galaxy_server_dir }}/lib/galaxy/dependencies/pinne
 galaxy_static_dir: "{{ galaxy_server_dir }}/static"
 
 # Galaxy config file can either be 'ini-paste' (old style) or 'yaml'
-galaxy_config_style: "ini-paste"
+galaxy_config_style: "yaml"
 galaxy_config_file_basename: "galaxy.{{ 'yml' if galaxy_config_style in ('yaml', 'yml') else 'ini' }}"
 galaxy_config_file_template: "{{ galaxy_config_file_basename }}.j2"
 galaxy_config_file: "{{ galaxy_config_dir }}/{{ galaxy_config_file_basename }}"
@@ -189,6 +190,7 @@ galaxy_app_config_default:
   mulled_resolution_cache_lock_dir: "{{ galaxy_mutable_data_dir }}/mulled/lock"
   tool_cache_data_dir: "{{ galaxy_cache_dir }}/tool_cache"
   tool_search_index_dir: "{{ galaxy_cache_dir }}/tool_search_index"
+  container_image_cache_path: "{{ galaxy_cache_dir }}/container_cache"
 
   # Mutable config files
   integrated_tool_panel_config: "{{ galaxy_mutable_config_dir }}/integrated_tool_panel.xml"

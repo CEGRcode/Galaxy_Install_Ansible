@@ -3,7 +3,6 @@
 
 - name: Include layout vars
   include_vars: "layout-{{ galaxy_layout | default('legacy') }}.yml"
-  #include_vars: layout-legacy.yml
 
 - name: Set any unset variables from layout defaults
   set_fact:

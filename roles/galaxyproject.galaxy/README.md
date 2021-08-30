@@ -4,6 +4,8 @@ Galaxy
 An [Ansible][ansible] role for installing and managing [Galaxy][galaxyproject] servers.  Despite the name confusion,
 [Galaxy][galaxyproject] bears no relation to [Ansible Galaxy][ansiblegalaxy].
 
+Getting started with this module? Check out our [Tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html)
+
 [ansible]: http://www.ansible.com/
 [galaxyproject]: https://galaxyproject.org/
 [ansiblegalaxy]: https://galaxy.ansible.com/
@@ -90,12 +92,10 @@ Options below that control individual file or subdirectory placement can still o
 
 **New options for Galaxy 18.01 and later**
 
-- `galaxy_config_style` (default: `ini-paste`): The type of Galaxy configuration file to write, `ini-paste` for the
-  traditional PasteDeploy-style INI file, or `yaml` for the YAML format supported by uWSGI.
+- `galaxy_config_style` (default: `yaml`): The type of Galaxy configuration file to write, `yaml` for the YAML format supported by uWSGI or `ini-paste` for the traditional PasteDeploy-style INI file
 - `galaxy_app_config_section` (default: depends on `galaxy_config_style`): The config file section under which the
   Galaxy config should be placed (and the key in `galaxy_config` in which the Galaxy config can be found. If
-  `galaxy_config_style` is `ini-paste` the default is `app:main`. If `galaxy_config_style` is `yaml`, the default is
-  `galaxy`.
+  `galaxy_config_style` is `yaml` the default is `galaxy`. If `galaxy_config_style` is `ini-paste`, the default is `app:main`.
 - `galaxy_uwsgi_yaml_parser` (default: `internal`): Controls whether the `uwsgi` section of the Galaxy config file will
   be written in uWSGI-style YAML or real YAML. By default, uWSGI's internal YAML parser does not support real YAML. Set
   to `libyaml` to write real YAML, if you are using uWSGI that has been compiled with libyaml. see **YAML Syntax** below
@@ -204,6 +204,11 @@ Several variables control which functions this role will perform (all default to
   superuser privileges.
 - `galaxy_manage_clone`: Clone Galaxy from the source repository and maintain it at a specified version (commit), as
   well as set up a [virtualenv][virtualenv] from which it can be run.
+- `galaxy_manage_download`: Download and unpack Galaxy from a remote archive url, as
+  well as set up a [virtualenv][virtualenv] from which it can be run.
+- `galaxy_manage_existing`: Take over a Galaxy directory that already exists, as
+  well as set up a [virtualenv][virtualenv] from which it can be run. `galaxy_server_dir` must point to the path which
+  already contains the source code of Galaxy.
 - `galaxy_manage_static_setup`: Manage "static" Galaxy configuration files - ones which are not modifiable by the Galaxy
   server itself. At a minimum, this is the primary Galaxy configuration file, `galaxy.ini`.
 - `galaxy_manage_mutable_setup`: Manage "mutable" Galaxy configuration files - ones which are modifiable by Galaxy (e.g.
@@ -211,7 +216,7 @@ Several variables control which functions this role will perform (all default to
 - `galaxy_manage_database`: Upgrade the database schema as necessary, when new schema versions become available.
 - `galaxy_fetch_dependencies`: Fetch Galaxy dependent modules to the Galaxy virtualenv.
 - `galaxy_build_client`: Build the Galaxy client application (web UI).
-- `galaxy_client_make_target` (default: `client-production-maps`): Set the client build type. Options include: `client`, 
+- `galaxy_client_make_target` (default: `client-production-maps`): Set the client build type. Options include: `client`,
   `client-production` and `client-production-maps`. See [Galaxy client readme][client-build] for details.
 - `galaxy_manage_errordocs` (default: `no`): Install Galaxy-styled 413 and 502 HTTP error documents for nginx. Requires
   write privileges for the nginx error document directory.
@@ -315,9 +320,11 @@ Install Galaxy on your local system with all the default options:
     galaxy_server_dir: /srv/galaxy
   connection: local
   roles:
-     - galaxy
-```
-
+     - galaxyproject.galaxy
+```  
+  
+If your Ansible version >= 2.10.4, then when you run `ansible-playbook playbook.yml` you should supply an extra argument `-u $USER`, otherwise you will get an error.
+  
 Once installed, you can start with:
 
 ```console

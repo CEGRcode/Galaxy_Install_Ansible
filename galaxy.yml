@@ -1,31 +1,35 @@
 ---
 - hosts: galaxyservers
-  vars_files:
-    - vars.yml
   become: true
-  become_user: root
-  become_method: sudo
-  vars:
-   ansible_become_pass: "{{ your_password }}"
   pre_tasks:
     - name: Install Dependencies
-      become: true
-      become_user: root
-      vars:
-        ansible_become_pass: "{{ your_password }}"
       package:
-        name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv', 'tar', 'bzip2', 'python3-venv']
-
+        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+    - git:
+        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+        dest: /libraries/
   handlers:
     - name: Restart Galaxy
       systemd:
         name: galaxy
         state: restarted
   roles:
-    - { role: galaxyproject.postgresql, become: yes, become_user: root,        ansible_become_pass: "{{ your_password }}" }
-    - { role: natefoo.postgresql_objects, become: true, become_user: postgres, ansible_become_pass: "{{ your_password }}"  }
-    - { role: geerlingguy.pip,            become: yes, become_user: root,      ansible_become_pass: "{{ your_password }}" }
-    - { role: galaxyproject.galaxy,       become: yes, become_user: root,     ansible_become_pass: "{{ your_password }}" }
-    - { role: uchida.miniconda,           become: yes, become_user: galaxy,      ansible_become_pass: "{{ your_password }}" }
-    - { role: usegalaxy_eu.galaxy_systemd,    become: yes, become_user: root,      ansible_become_pass: "{{ your_password }}" } 
-
+    - galaxyproject.repos
+    - galaxyproject.slurm
+    - galaxyproject.postgresql
+    - role: natefoo.postgresql_objects
+      become: true
+      become_user: postgres
+    - geerlingguy.pip
+    - galaxyproject.galaxy
+    - role: uchida.miniconda
+      become: true
+      become_user: "{{ galaxy_user.name }}"
+    - usegalaxy_eu.galaxy_systemd
+    - usegalaxy_eu.rabbitmq
+    - galaxyproject.nginx 
+    - galaxyproject.cvmfs
+  post_tasks:
+    - name: Install slurm-drmaa
+      package:
+        name: slurm-drmaa1

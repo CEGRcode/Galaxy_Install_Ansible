@@ -1,7 +1,4 @@
 ---
-- name: Include variable setup tasks
-  import_tasks: include-vars.yml
-
 - name: Include virtualenv installation tasks
   include_tasks: install-with-venv.yml
   when: certbot_install_method == 'virtualenv'
