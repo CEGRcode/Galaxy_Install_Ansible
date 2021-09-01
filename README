@@ -20,5 +20,7 @@ Pulsar with
 RabbitMQ is used for communication between Galaxy and Pulsar
 
 
-
+Note:
+number of CPUs in Pulsar machine needs to be updated based on specific machine configuration at:
+group_vars/pulsarservers.yml
 
