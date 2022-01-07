@@ -9,13 +9,14 @@
             <param id="amqp_consumer_timeout">2.0</param>
             <param id="amqp_publish_retry">True</param>
             <param id="amqp_publish_retry_max_retries">60</param>
-            <param id="galaxy_url">https://{{ inventory_hostname }}</param>
+            <param id="galaxy_url">http://{{ inventory_hostname }}</param>
             <param id="manager">_default_</param>
          </plugin>
  
  </plugins>
     <destinations default="slurm">
         <destination id="slurm" runner="slurm">
+            <param id="nativeSpecification">--nodes=1 --ntasks=1 --cpus-per-task=1 </param>
         </destination>
         <destination id="local_destination" runner="local_plugin">
          </destination>

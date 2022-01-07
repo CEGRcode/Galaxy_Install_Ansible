@@ -2,6 +2,6 @@
 galaxy.egc.cac.cornell.edu ansible_connection=local ansible_user=ubuntu
 
 [pulsarservers]
-128.84.9.67 ansible_user=ubuntu
+128.84.8.149 ansible_user=ubuntu
 
 

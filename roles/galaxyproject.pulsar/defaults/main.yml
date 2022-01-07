@@ -48,10 +48,10 @@ pulsar_job_metrics_plugins:
   - name: uname
 
 # job_managers.ini contents
-# pulsar_job_managers:
-#  _default_:
-#    type: queued_python
-#    num_concurrent_jobs: 3
+pulsar_job_managers:
+  _default_:
+    type: queued_python
+    num_concurrent_jobs: 3
 
 ## Target a drmaa library.
 # pulsar_drmaa_library_path: {{ galaxy_instance_remote_dir }}/slurm-drmaa/lib/libdrmaa.so
