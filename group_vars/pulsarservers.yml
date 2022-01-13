@@ -1,4 +1,4 @@
-galaxy_server_url: galaxy.egc.cac.cornell.edu  # Important!!!
+galaxy_server_url: galaxy.dev.cac.cornell.edu  # Important!!!
 # Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 
 pulsar_root: /mnt/pulsar
@@ -72,7 +72,7 @@ pulsar_dependency_resolvers:
 slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 slurm_nodes:
 - name: localhost # Name of our host
-  CPUs: 14         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
+  CPUs: 12         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
 slurm_config:
   #SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
   SelectType: select/cons_res

@@ -34,8 +34,9 @@ galaxy_config:
     job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
     job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
     tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
-    brand: "🧬🔬🚀egc"
-    admin_users: admin@example.org
+    brand: "🧬egc"
+    admin_users: brc_epigenomics@cornell.edu
+    serve_xss_vulnerable_mimetypes: true # To allow SVG files be shown in galaxy web interface
     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
     file_path: /data
     check_migrate_tools: false
@@ -123,7 +124,7 @@ nginx_ssl_servers:
   - galaxy
 nginx_enable_default_server: false
 nginx_conf_http:
-  client_max_body_size: 1g
+  client_max_body_size: 10g
 nginx_ssl_role: usegalaxy_eu.certbot
 nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -139,15 +140,15 @@ singularity_go_path: "{{ golang_install_dir }}"
 slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 slurm_nodes:
 - name: localhost # Name of our host
-  CPUs: 2         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
+  CPUs: 6         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
 slurm_config:
   SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
   SelectType: select/cons_res
-  SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+  SelectTypeParameters: CR_CPU  # Allocate individual cores/memory instead of entire node
 
 # RabbitMQ
 rabbitmq_admin_password: a-different-long-password
-rabbitmq_version: 3.8.9-1
+rabbitmq_version: 3.8.16-1
 rabbitmq_plugins: rabbitmq_management
 
 rabbitmq_config:

@@ -1,5 +1,5 @@
 [galaxyservers]
-galaxy.egc.cac.cornell.edu ansible_connection=local ansible_user=ubuntu
+galaxy.dev.cac.cornell.edu ansible_connection=local ansible_user=ubuntu
 
 [pulsarservers]
 128.84.9.67 ansible_user=ubuntu
