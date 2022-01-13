@@ -1,5 +1,25 @@
 To run the ansible playbook use the command:
 
+To run the ansible playbook ssh to machine you intend to run Galaxy on. The guideline assumes you login as "ubuntu" user. The code is tested for ubuntu 20.04 LTS
+
+on Galaxy machine:
+
+apt install ansible
+
+apt-get install sshpass.
+
+on Pulsar machine:
+
+sudo passwd ubuntu
+
+sud vi /etc/ssh/sshd_config
+
+change "PasswordAuthentication no" To "PasswordAuthentication yes"
+
+on Galaxy machine:
+
+ansible-playbook galaxy.yml
+
 ansible-playbook pulsar.yml --ask-pass to run pulsar
 
 In the the groupvars/all.yml file, a password needs to be used for secure communication between pulsar and Galaxy.
