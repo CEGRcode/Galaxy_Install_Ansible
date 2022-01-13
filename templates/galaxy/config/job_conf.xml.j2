@@ -16,6 +16,7 @@
  </plugins>
     <destinations default="slurm">
         <destination id="slurm" runner="slurm">
+            <param id="nativeSpecification">--nodes=1 --ntasks=1 --cpus-per-task=1 </param>
         </destination>
         <destination id="local_destination" runner="local_plugin">
          </destination>
@@ -41,6 +42,7 @@
             <param id="remote_metadata">False</param>
             <param id="rewrite_parameters">True</param>
             <param id="transport">curl</param>
+            <param id="submit_native_specification">--nodes=1 --ntasks=1 --cpus-per-task=4 </param>
          </destination>
 
     </destinations>
