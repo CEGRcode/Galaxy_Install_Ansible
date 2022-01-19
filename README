@@ -3,23 +3,27 @@ To run the ansible playbook ssh to machine you intend to run Galaxy on. The guid
 
 on Galaxy machine:
 
-apt install ansible
+    `apt install ansible`
 
-apt-get install sshpass.
+    `apt-get install sshpass`
 
 on Pulsar machine:
 
-sudo passwd ubuntu
+    `sudo passwd ubuntu`
 
-    sudo vi /etc/ssh/sshd_config
+    `sudo vi /etc/ssh/sshd_config`
 
-    change "PasswordAuthentication no" To "PasswordAuthentication yes"
+    change `PasswordAuthentication no` To `PasswordAuthentication yes`
 
 on Galaxy machine:
+  
+    `git clone https://github.com/CEGRcode/Galaxy_Install_Ansible.git`
+    
+    `cd Galaxy_Install_Ansible`
+    
+    `ansible-playbook galaxy.yml`
 
-    ansible-playbook galaxy.yml
-
-    ansible-playbook pulsar.yml --ask-pass
+    `ansible-playbook pulsar.yml --ask-pass`
 
 
 Please note, in the the groupvars/all.yml file, a password needs to be used for secure communication between pulsar and Galaxy.
@@ -42,7 +46,40 @@ Pulsar with
 RabbitMQ is used for communication between Galaxy and Pulsar
 
 
-Note:
+Notes:
 number of CPUs in Pulsar machine needs to be updated based on specific machine configuration at:
 group_vars/pulsarservers.yml
+
+Galaxy root directory, where all the files related to Galaxy will be installed, can be changed in group_vars/galaxyservers.yml
+
+To Install galaxy on a separate volume from OS follow these steps.
+
+1- Create a new empty volume in OpenStack. Volumes->Create Volume
+
+2- Attach The created volume to an instance Volums->select your volume->Manage Attachment
+
+3-ssh to the instance to which new Volume is attached and type 'lsblk' to see new volume which is likely /dev/vdb
+
+4- mkfs -t xfs /dev/vdb which creates filesystems based on XFS format which is an expandable disk format
+
+5-make a directory where is the mounting point of the new volume. `sudo mkdir /mnt/mountpoint`
+
+6- protect the mountpoint directory. `sudo chattr +i /mnt/mountpoint`
+
+7- Mount the Volume. `sudo mount /dev/vdb /mnt/mountpoint`
+
+8- make the mount automatic after the reboot. 
+
+vi /etc/fstab  add the line. "/dev/vdb /mnt/mountpoint ext4 defaults,nofail" 
+
+Make sure the four entries are tab separated.
+
+Change the root directory of galaxy based on the name of the mount directory for example it can be:
+
+`/mnt/mountpoint/srv/galaxy`
+
+
+
+
+
 
