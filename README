@@ -14,6 +14,7 @@ on Pulsar machine:
     `sudo vi /etc/ssh/sshd_config`
 
     change `PasswordAuthentication no` To `PasswordAuthentication yes`
+    `sudo service ssh restart`
 
 on Galaxy machine:
   
