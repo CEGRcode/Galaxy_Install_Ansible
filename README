@@ -3,7 +3,7 @@ To run the ansible playbook ssh to machine you intend to run Galaxy on. The guid
 
 on Galaxy machine:
 
-    `apt install ansible`
+    apt install ansible
 
     `apt-get install sshpass`
 
@@ -79,6 +79,43 @@ Change the root directory of galaxy based on the name of the mount directory for
 
 `/mnt/mountpoint/srv/galaxy`
 
+
+Notes on installing ChIP-exo pipeline tools using Ephemeris:
+
+Tools of the pipeline that are avaiable on Galaxy tool-shed can be installed through command line using Ephemeris package as the following:
+
+1. `virtualenv -p python3 ~/ephemeris_venv`
+
+2. `. ~/ephemeris_venv/bin/activate`
+
+3. `pip install ephemeris`
+
+4. `shed-tools install -g https://your-galaxy -a <api-key> -t pairedPEGR003_tools.yml`
+
+where api-key can be found in Galaxy web interface under `Admin->Users`
+
+Other local tools are avilable in CEGR repository and can be downloaded using git clone.
+
+1- https://github.com/CEGRcode/scriptmanager-galaxy_tools
+
+2- https://github.com/CEGRcode/pegr-galaxy_tools
+
+3- https://github.com/CEGRcode/general-galaxy_tools
+
+Installation instructions are given within each repository
+
+
+Notes on uplaoding workflow to Galaxy
+
+Workflow can be downloaded from another Galaxy instance and then uploaded to the new Galaxy instance as the following:
+
+Downloading Workflow:
+
+  Wokflow-> Select the desired workflow-> download
+
+Uploading Workflow:
+
+Wokflow -> import -> browse
 
 
 
