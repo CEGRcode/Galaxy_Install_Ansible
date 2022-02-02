@@ -47,12 +47,15 @@ Pulsar with
 RabbitMQ is used for communication between Galaxy and Pulsar
 
 
-Notes:
+Note 1:
 number of CPUs in Pulsar machine needs to be updated based on specific machine configuration at:
 group_vars/pulsarservers.yml
 
 Galaxy root directory, where all the files related to Galaxy will be installed, can be changed in group_vars/galaxyservers.yml
 
 
-
+Note 2:
+ Currently there is a bug in Galaxy that Admin->Manage Allowlist cannot be updated. To overcome this issue, you can follow these steps:
+A. `sudo touch /sr/galaxy/server/config/sanitize_allowlist.txt`
+B. `sudo chmod 777 /sr/galaxy/server/config/sanitize_allowlist.txt`
 
