@@ -35,6 +35,7 @@ galaxy_config:
     job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
     tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
     brand: "🧬egc"
+    allow_path_paste: true
     admin_users: brc_epigenomics@cornell.edu
     serve_xss_vulnerable_mimetypes: true # To allow SVG files be shown in galaxy web interface
     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
