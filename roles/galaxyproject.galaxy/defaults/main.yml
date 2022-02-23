@@ -144,7 +144,7 @@ galaxy_download_url: "{{ galaxy_repo | replace('.git', '') }}/archive/{{ galaxy_
 
 # List of tool configs to load
 galaxy_tool_config_files:
-  - "{{ galaxy_server_dir }}/config/tool_conf.xml.sample"
+  - "{{ galaxy_server_dir }}/config/tool_conf.xml"
 
 # The shed tool conf path is needed separate from the value of tool_conf for instantiation. The 'conf' version is a
 # legacy variable name and should not be used.

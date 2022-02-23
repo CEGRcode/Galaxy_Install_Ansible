@@ -11,7 +11,7 @@ postgresql_objects_databases:
   - name: galaxy
     owner: galaxy
 # PostgreSQL Backups
-postgresql_backup_dir: /data/backups
+postgresql_backup_dir: /mnt/mountpoint/srv/data/backups
 postgresql_backup_local_dir: "~postgres/backups"
 
 
@@ -39,7 +39,7 @@ galaxy_config:
     admin_users: brc_epigenomics@cornell.edu
     serve_xss_vulnerable_mimetypes: true # To allow SVG files be shown in galaxy web interface
     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
-    file_path: /data
+    file_path: /mnt/mountpoint/srv/data
     check_migrate_tools: false
     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
     job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"

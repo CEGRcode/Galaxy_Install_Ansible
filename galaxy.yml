@@ -33,3 +33,18 @@
     - name: Install slurm-drmaa
       package:
         name: slurm-drmaa1
+    - name: Copy tool config file for galaxy
+      copy:
+        src: files/galaxy/config/tool_conf.xml 
+        #dest: /mnt/mountpoint/srv/galaxy/server/config/tool_conf.xml
+        dest: "{{ galaxy_root }}/server/config/tool_conf.xml" 
+    - name: Copy static html file
+      copy:
+              #src: /home/ubuntu/220221_ansible_text_v2/Galaxy_Install_Ansible/files/galaxy/config/welcome.html 
+        src: files/galaxy/config/welcome.html 
+        #dest: /mnt/mountpoint/srv/galaxy/server/config/welcome.html
+        dest: "{{ galaxy_root }}/server/static/welcome.html" 
+    - name: Copy egc logo for welcome.html file
+      copy:
+        src: files/galaxy/config/logo.png
+        dest: "{{ galaxy_root }}/server/static/logo.png" 

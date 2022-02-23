@@ -59,3 +59,18 @@ Note 2:
 A. `sudo touch /sr/galaxy/server/config/sanitize_allowlist.txt`
 B. `sudo chmod 777 /sr/galaxy/server/config/sanitize_allowlist.txt`
 
+Note 3:
+
+Ansible playbook currently copies EGC version of tool_conf.xml and welcome.html file.
+The following files are changed in ansible-playbook
+
+A. In `templates/nginx/galaxy.j2`  `welcome.html.sample` is changed to `welcome.html`
+B. In `/roles/galaxyproject.galaxy/defaults/main.yml` `tool_conf.xml.sample` is changed to `tool_conf.xml`
+
+Note 4: 
+In the current git repository roles are downloaded for galaxy 20.09. Should a new version of Galaxy be installed, these roles and their versions needs to be updated by
+
+`ansible-galaxy install -p roles -r requirements.yml`
+
+If the roles ar updated please update changes in Note 3 as well.
+ 
