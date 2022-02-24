@@ -74,3 +74,6 @@ In the current git repository roles are downloaded for galaxy 20.09. Should a ne
 
 If the roles ar updated please update changes in Note 3 as well.
  
+Note 5: 
+
+In this ansible, the default admin for the deployed galaxy is brc_epigenomics@cornell.edu
