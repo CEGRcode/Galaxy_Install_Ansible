@@ -1,7 +1,7 @@
 - src: galaxyproject.galaxy
-  version: 0.9.7
+  version: 0.9.16
 - src: galaxyproject.nginx
-  version: 0.6.4
+  version: 0.7.0
 - src: galaxyproject.postgresql
   version: 1.0.3
 - src: natefoo.postgresql_objects
@@ -10,8 +10,8 @@
   version: 2.0.0
 - src: uchida.miniconda
   version: 0.3.0
-- src: usegalaxy_eu.galaxy_systemd
-  version: 0.1.4
+  #- src: usegalaxy_eu.galaxy_systemd looks like not needed 2022
+  #version: 0.1.4
 - src: usegalaxy_eu.certbot
   version: 0.1.5
 - src: cyverse-ansible.singularity

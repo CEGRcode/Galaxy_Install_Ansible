@@ -1,6 +1,9 @@
 ---
 - hosts: galaxyservers
   become: true
+  bcome_user: root  # Included in 2022 I am not sure if it is neccessary
+  var_files:
+    - group_vars/secret.yml    # new 2022
   pre_tasks:
     - name: Install Dependencies
       package:
@@ -25,7 +28,7 @@
     - role: uchida.miniconda
       become: true
       become_user: "{{ galaxy_user.name }}"
-    - usegalaxy_eu.galaxy_systemd
+      #  - usegalaxy_eu.galaxy_systemd looks like not needed 2022
     - usegalaxy_eu.rabbitmq
     - galaxyproject.nginx 
     - galaxyproject.cvmfs

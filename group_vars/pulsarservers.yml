@@ -1,4 +1,4 @@
-galaxy_server_url: galaxy.dev.cac.cornell.edu  # Important!!!
+galaxy_server_url: "galaxy.dev.cac.cornell.edu"  # Important!!!
 # Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 
 pulsar_root: /mnt/pulsar
@@ -6,7 +6,7 @@ pulsar_root: /mnt/pulsar
 pulsar_pip_install: true
 pulsar_pycurl_ssl_library: openssl
 pulsar_systemd: true
-pulsar_systemd_runner: webless
+pulsar_systemd_runner: webless # not restAPI mode 
 
 pulsar_create_user: true
 pulsar_user: {name: pulsar, shell: /bin/bash}
@@ -17,7 +17,7 @@ pulsar_optional_dependencies:
   - pycurl
   # drmaa required if connecting to an external DRM using it.
   - drmaa
-  # kombu needed if using a message queue
+  # kombu needed if using a message queue. python bining to messageQ
   - kombu
   # amqp 5.0.3 changes behaviour in an unexpected way, pin for now.
   - 'amqp==5.0.2'
@@ -67,6 +67,9 @@ pulsar_dependency_resolvers:
       - name: auto_init
         value: true
 
+# Pulsar should use the same job metrics plugins as Galaxy. This will automatically set `job_metrics_config_file` in
+# `pulsar_yaml_config` and create `{{ pulsar_config_dir }}/job_metrics_conf.yml`.
+pulsar_job_metrics_plugins: "{{ galaxy_job_metrics_plugins }}" # 2022 addition
 
 # slurm
 slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.

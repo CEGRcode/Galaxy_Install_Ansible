@@ -11,7 +11,8 @@ server {
     # The most important location block, by default all requests are sent to uWSGI
     location / {
         # This is the backend to send the requests to.
-        uwsgi_pass 127.0.0.1:8080;
+        # uwsgi_pass 127.0.0.1:8080; ## old version
+        uwsgi_pass {{ galaxy_config.uwsgi.socket }};  # 2022 included
         uwsgi_param UWSGI_SCHEME $scheme;
         include uwsgi_params;
     }
@@ -45,6 +46,16 @@ server {
 
     location /favicon.ico {
         alias {{ galaxy_server_dir }}/static/favicon.ico;
+    }
+    # 2022 features
+    location /_x_accel_redirect {
+        internal;
+        alias /;
+    }
+
+    # Support click-to-run in the GTN-in-Galaxy Webhook. 2022 feature
+    location /training-material/ {
+        proxy_pass https://training.galaxyproject.org/training-material/;
     }
 }
 
