@@ -1,40 +1,56 @@
 
-To run the ansible playbook ssh to machine you intend to run Galaxy on. The guideline assumes you login as "ubuntu" user. The code is tested for ubuntu 20.04 LTS
+To run the ansible playbook ssh to machine you intend to run Galaxy on. The guideline assumes you login as `ubuntu` user. The code is tested for ubuntu 20.04 LTS
 
-1- on Galaxy machine:
+1- login to Galaxy machine as `ubuntu` user and install `Ansible` for running Anisble playbooks and `sshpass` to allow ssh to Pulsar machine using Ansible playbook
 
-    `apt install ansible`
+```
+apt install ansible
 
-    `apt-get install sshpass`
+apt-get install sshpass
+```
 
-2- on Pulsar machine:
+2- on Pulsar machine, login as as `ubuntu` user, create password for `ubuntu` user, and change the ssh config file to allow login by using password.
 
-    `sudo passwd ubuntu`
+```
+sudo passwd ubuntu
+```
 
-    `sudo vi /etc/ssh/sshd_config`
-
-    change `PasswordAuthentication no` To `PasswordAuthentication yes`
-    `sudo service ssh restart`
-
-3- on Galaxy machine as ubuntu user:
-  
-    `git clone https://github.com/CEGRcode/Galaxy_Install_Ansible.git`
+`sudo vi /etc/ssh/sshd_config` inside the file, change `PasswordAuthentication no` To `PasswordAuthentication yes`
     
-    `cd Galaxy_Install_Ansible`
-    
-
-4- Make sure the hostname is correct in ansible
-
-   `vi hosts` update the hostname as your Galaxy machine hostname: For example the host name on Ansible is now `galaxy.dev.cac.cornell.edu` change it to your own
-
+ 3- Restart ssh service to reflect the changes made in the config file
  
-    `ansible-playbook galaxy.yml`
+ ```
+ sudo service ssh restart
+ ```
 
-    `ansible-playbook pulsar.yml --ask-pass`
+4- On Galaxy machine as `ubuntu` user, clone the Ansible playbooks
+  
+  ```
+  git clone https://github.com/CEGRcode/Galaxy_Install_Ansible.git`
+    
+  cd Galaxy_Install_Ansible
+  ```
+5- Make sure the hostname of Galaxy machine is correct and IP address of Pulsar machine is correct/
 
+`vi hosts` update the hostname as your Galaxy machine hostname: For example the host name on Ansible is now "galaxy.dev.cac.cornell.edu" change it to your own hostname. The IP address of Pulsar machine is "128.84.9.67"
+   
+ 
+6- on `Galaxy` machine as `ubuntu` user Run Ansible playbook to deploy `Galaxy` (~20min).
+ 
+```
+ansible-playbook galaxy.yml
+```
 
-Please note, in the the groupvars/all.yml file, a password needs to be used for secure communication between pulsar and Galaxy.
-If Pulsar is installed already, you can just ignore all the pulsar steps.
+7-On `Galaxy` machine as `ubuntu` user Run Ansible playbook to deploy `Pulsar` on remote machine for which the IP is provided in Step 5. Ansible will ssh to Pulsar machine and will install Pulsar. When prompted for password type passwrod you created in Step 2.
+    
+```
+ansible-playbook pulsar.yml --ask-pass
+```
+
+Notes
+
+A) In the the groupvars/all.yml file, a password is used for secure communication between pulsar and Galaxy. Change it if you like.
+
 
 Current Ansible includes
 
