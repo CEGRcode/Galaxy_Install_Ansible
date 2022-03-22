@@ -71,10 +71,14 @@ Answer yes to the following questions
 
 
 8-On `Galaxy` machine as `ubuntu` user Run Ansible playbook to deploy `Pulsar` on remote machine for which the IP address is provided in Step 5. Ansible will ssh to Pulsar machine and will deploy Pulsar. When prompted for password type passwrod you created in Step 2 (~15min)
+
     
 ```
 ansible-playbook pulsar.yml --ask-pass
 ```
+
+**After step 8 you are done with deploying Galaxy and Pulsar. You may follow instructions in README file on https://github.com/CEGRcode/bioinfo_pipeline to install, tools and pipelines in your deployed Galaxy for ChIP-exo analysis.**
+
 <h2> Notes on Running Galaxy and Pulsar Playbooks </h2>
 
 **Note 1:**
