@@ -10,7 +10,7 @@
   version: 2.0.0
 - src: uchida.miniconda
   version: 0.3.0
-  #- src: usegalaxy_eu.galaxy_systemd looks like not needed 2022
+  #- src: usegalaxy_eu.galaxy_systemd not needed 2022
   #version: 0.1.4
 - src: usegalaxy_eu.certbot
   version: 0.1.5
@@ -27,5 +27,5 @@
 - name: usegalaxy_eu.rabbitmq
   version: 0.1.0
 - src: galaxyproject.pulsar
-  version: 1.0.6
+  version: 1.0.8
 
