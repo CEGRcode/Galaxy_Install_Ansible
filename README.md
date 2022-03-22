@@ -10,6 +10,8 @@ The current Ansible playbook for Galaxy deploys `Galaxy base`, `CVMFS`, `systemd
 
 The playbooks are tested for ubuntu 20.04 LTS clean machines for Galaxy and Pulsar.
 
+This instructions assumes that you already have spun up a Galaxy machine with two volumes. One for Operating System and one for Galaxy. If you haven't done so, please follow the wiki pages of this repository pages `Part1: Spin up a new instance on open stack for Galaxy` and `Part 2: Add a separate Volume to Galaxy instance on OpenStack` to spin up Galaxy machine
+
 1- Login to Galaxy machine as `ubuntu` user and install `Ansible` for running Anisble playbooks and `sshpass` to allow ssh to Pulsar machine using Ansible playbook
 
 ```
