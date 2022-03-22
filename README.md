@@ -39,7 +39,7 @@ sudo passwd ubuntu
     
   cd Galaxy_Install_Ansible
   ```
-5- Make sure the hostname of Galaxy machine is correct and IP address of Pulsar machine is correct.
+5- Make sure the hostname of Galaxy machine is correct and IP address of Pulsar machine is correct. By following 5.1 and 5.2 steps:
 
   5-1 Update the hostname of your Galaxy machine and IP address of Pulsar machine. 
   ```
@@ -107,7 +107,7 @@ A. In `templates/nginx/galaxy.j2`  `welcome.html.sample` is changed to `welcome.
 
 B. In `/roles/galaxyproject.galaxy/defaults/main.yml` `tool_conf.xml.sample` is changed to `tool_conf.xml`
 
-***Note 5:** 
+**Note 5:** 
 
 In the current git repository roles are downloaded for galaxy 20.09. Should a new version of Galaxy be installed, these roles and their versions needs to be updated by
 
@@ -126,6 +126,7 @@ In this ansible, the default admin for the deployed galaxy is brc_epigenomics@co
 In the the `groupvars/all.yml` file, a password is used for secure communication between pulsar and Galaxy. Change it if you like.
 
 **Note 8:**
-This Ansible playbooks are based on Galaxy workshop on 2021 and the versions of Galaxy is `20.09` and Pulsar is `1.0.6`. In the Galaxy workshop on March 2022 the Galaxy version is updatd to `22.01` and Pulsar to `1.0.8`. Some updates are shown in `updates2022` of this repository, but haven't been tested
+
+This Ansible playbooks are based on Galaxy workshop on 2021 and the versions of Galaxy is `20.09` and Pulsar is `1.0.6`. In the Galaxy workshop on March 2022 the Galaxy version is updatd to `22.01` and Pulsar to `1.0.8`. Updates are shown in `updates2022` branch of this repository, but haven't been tested
 
 
