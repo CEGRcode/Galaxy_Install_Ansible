@@ -31,6 +31,7 @@ sudo passwd ubuntu
  ```
  sudo service ssh restart
  ```
+ You may want to logout and ssh as ubuntu user with password to Pulsar machine to make sure your changes are workig fine.
 
 4- On Galaxy machine as `ubuntu` user, clone the Ansible playbooks
   
@@ -61,7 +62,15 @@ sudo passwd ubuntu
 ansible-playbook galaxy.yml
 ```
 
-7-On `Galaxy` machine as `ubuntu` user Run Ansible playbook to deploy `Pulsar` on remote machine for which the IP address is provided in Step 5. Ansible will ssh to Pulsar machine and will deploy Pulsar. When prompted for password type passwrod you created in Step 2 (~15min)
+7- On `Galaxy` machine as `ubuntu` user ssh to Pulsar machine with password. This will allow you to answer to the questions of First Time Connections to a remote machine. 
+```
+ssh ubuntu@IP_address_pulsar_machine
+```
+Answer yes to the following questions
+`Are you sure you want to continue connecting (yes/no/[fingerprint])?`
+
+
+8-On `Galaxy` machine as `ubuntu` user Run Ansible playbook to deploy `Pulsar` on remote machine for which the IP address is provided in Step 5. Ansible will ssh to Pulsar machine and will deploy Pulsar. When prompted for password type passwrod you created in Step 2 (~15min)
     
 ```
 ansible-playbook pulsar.yml --ask-pass
