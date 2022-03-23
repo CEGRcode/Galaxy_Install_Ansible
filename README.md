@@ -116,7 +116,7 @@ sudo chmod 777 /sr/galaxy/server/config/sanitize_allowlist.txt
 
 **Note 4:**
 
-Ansible playbook currently copies EGC version of tool_conf.xml and welcome.html file. The following files are changed in ansible-playbook
+Ansible playbook currently copies EGC version of `local_tool_conf.xml` and `welcome.html` file. The following files are changed in ansible-playbook
 
 A. In `templates/nginx/galaxy.j2`  `welcome.html.sample` is changed to `welcome.html`
 
