@@ -120,7 +120,7 @@ Ansible playbook currently copies EGC version of tool_conf.xml and welcome.html 
 
 A. In `templates/nginx/galaxy.j2`  `welcome.html.sample` is changed to `welcome.html`
 
-B. In `/roles/galaxyproject.galaxy/defaults/main.yml` `tool_conf.xml.sample` is changed to `tool_conf.xml`
+B. `local_tool_conf.xml` which by default includes just a testing local tool is overwritten to includes all tools needed by ChIP-exo pipline. The file is located at `/templates/galaxy/config/local_tool_conf.xml.j2`
 
 **Note 5:** 
 
@@ -130,7 +130,7 @@ In the current git repository roles are downloaded for galaxy 20.09. Should a ne
 ansible-galaxy install -p roles -r requirements.yml
 ```
 
-If the roles ar updated please update changes in Note 3 as well.
+If the roles ar updated please revisit changes in Note 4 as well.
  
 **Note 6:** 
 
